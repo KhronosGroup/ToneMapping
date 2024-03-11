@@ -1,0 +1,77 @@
+
+ocio_profile_version: 2
+
+roles:
+  reference: Linear Rec.709
+
+  # Internal scene linear space
+  scene_linear: Linear Rec.709
+  rendering: Linear Rec.709
+
+  # Default color space for byte image
+  default_byte: sRGB
+
+  # Default color space for float images
+  default_float: Linear Rec.709
+
+  # Default color space sequencer is working in
+  default_sequencer: sRGB
+
+  # Distribution of colors in color picker
+  color_picking: sRGB
+
+  # Non-color data
+  data: Non-Color
+
+  # For interop between configs, and to determine XYZ for rendering
+  aces_interchange: ACES2065-1
+  cie_xyz_d65_interchange: Linear CIE-XYZ D65
+
+  # Specified by OCIO
+  color_timing: Linear Rec.709
+  compositing_log: Linear Rec.709
+  default: Linear Rec.709
+  matte_paint: Linear Rec.709
+  texture_paint: Linear Rec.709
+
+displays:
+  sRGB:
+    - !<View> {name: PBR Neutral, colorspace: PBR Neutral sRGB}
+active_displays: [sRGB]
+active_views: [PBR Neutral]
+
+colorspaces:
+  - !<ColorSpace>
+    name: Linear Rec.709
+    family: Linear
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      Linear BT.709 with illuminant D65 white point
+    isdata: false
+
+  - !<ColorSpace>
+    name: sRGB
+    family: Display
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      sRGB IEC 61966-2-1 compound (piece-wise) encoding
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ExponentWithLinearTransform> {gamma: 2.4, offset: 0.055, direction: inverse}
+
+  - !<ColorSpace>
+    name: PBR Neutral sRGB
+    family: PBR Neutral
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      Khronos PBR Neutral Image Encoding for sRGB Display
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<AllocationTransform> {allocation: lg2, vars: [-9, 10]}
+        - !<FileTransform> {src: pbrNeutral.cube, interpolation: tetrahedral}
+        - !<ColorSpaceTransform> {src: Linear Rec.709, dst: sRGB}
