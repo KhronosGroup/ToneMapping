@@ -15,7 +15,7 @@ $F_{90}=0.04$, Fresnel reflection at normal incidence of common IoR = 1.5 materi
 $K_s=0.8-F_{90}$, parameter controlling when highlight compression starts.  
 $K_d=0.15$, parameter controlling the speed of desaturation.  
 
-Note that all the following entities will be positive for all non-negative input.  
+Note that all the following entities will be non-negative for all non-negative input.  
 $x=\min\left(R,G,B\right)$  
 
 $$f=\begin{cases} 
@@ -34,7 +34,8 @@ $$\mathbf c_{out}=\begin{cases}
 
 $\mathbf c_{out}$ is the linear output color, still in Rec. 709, but now in the [0, 1] range.
 
-Three notes regarding these equations:
+Notes regarding these equations:
 - $\mathbf c_{out}=\mathbf c_{in}-F_{90}$ for all input colors where $0.08\leq R\leq 0.8$, $0.08\leq G\leq 0.8$, and $0.08\leq B\leq 0.8$. This gives the range of base colors for which the guarantee holds that the base color will be exactly reproduced in the output render for a shiny dielectric material facing the camera under unitary-white lighting. 
+- For all input colors, there are no hue shifts (angle around the white axis), as the only changes are within the plane defined by the input color and the white axis ($[1, 1, 1]$).
 - All partial derivatives of $\mathbf c_{out}$ with respect to $\mathbf c_{in}$ are continuous over the entire domain, vanishing at the boundaries, which is what reduces visual artifacts.
 - This mapping is 1:1 and onto, and analytically invertible. 
