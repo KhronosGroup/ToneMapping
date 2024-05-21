@@ -1,6 +1,8 @@
 
 ocio_profile_version: 2
 
+search_path: .
+
 roles:
   reference: Linear Rec.709
 
@@ -20,19 +22,8 @@ roles:
   # Distribution of colors in color picker
   color_picking: sRGB
 
-  # Non-color data
-  data: Non-Color
-
-  # For interop between configs, and to determine XYZ for rendering
-  aces_interchange: ACES2065-1
-  cie_xyz_d65_interchange: Linear CIE-XYZ D65
-
   # Specified by OCIO
-  color_timing: Linear Rec.709
-  compositing_log: Linear Rec.709
   default: Linear Rec.709
-  matte_paint: Linear Rec.709
-  texture_paint: Linear Rec.709
 
 displays:
   sRGB:
@@ -63,6 +54,18 @@ colorspaces:
         - !<ExponentWithLinearTransform> {gamma: 2.4, offset: 0.055, direction: inverse}
 
   - !<ColorSpace>
+    name: Gamma 2.2 Rec.709
+    family: Display
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      Pure power sRGB alternative
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<ExponentTransform> {value: 2.2, direction: inverse}
+
+  - !<ColorSpace>
     name: PBR Neutral sRGB
     family: PBR Neutral
     equalitygroup:
@@ -75,3 +78,17 @@ colorspaces:
         - !<AllocationTransform> {allocation: lg2, vars: [-9, 10]}
         - !<FileTransform> {src: pbrNeutral.cube, interpolation: tetrahedral}
         - !<ColorSpaceTransform> {src: Linear Rec.709, dst: sRGB}
+
+  - !<ColorSpace>
+    name: PBR Neutral Gamma 2.2
+    family: PBR Neutral
+    equalitygroup:
+    bitdepth: 32f
+    description: |
+      Khronos PBR Neutral Image Encoding for Gamma 2.2 sRGB Display variant
+    isdata: false
+    from_scene_reference: !<GroupTransform>
+      children:
+        - !<AllocationTransform> {allocation: lg2, vars: [-9, 10]}
+        - !<FileTransform> {src: pbrNeutral.cube, interpolation: tetrahedral}
+        - !<ColorSpaceTransform> {src: Linear Rec.709, dst: Gamma 2.2 Rec.709}
