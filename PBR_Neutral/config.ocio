@@ -28,8 +28,12 @@ roles:
 displays:
   sRGB:
     - !<View> {name: PBR Neutral, colorspace: PBR Neutral sRGB}
-active_displays: [sRGB]
+  Gamma 2.2 Rec.709:
+    - !<View> {name: PBR Neutral, colorspace: PBR Neutral Gamma 2.2}
+
+active_displays: [sRGB, Gamma 2.2 Rec.709]
 active_views: [PBR Neutral]
+inactive_colorspaces: [PBR Neutral sRGB, PBR Neutral Gamma 2.2]
 
 colorspaces:
   - !<ColorSpace>
