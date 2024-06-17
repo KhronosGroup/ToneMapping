@@ -1,3 +1,8 @@
+<!--
+Copyright 2024 The Khronos Group Inc.
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Khronos PBR Neutral Tone Mapper
 
 For details on how this tone mapper was developed and what problems it solves, please see the [write-up](https://modelviewer.dev/examples/tone-mapping), complete with interactive graphics. You can also test it interactively against other tone mappers with your own GLBs and HDR lighting [here](https://tone-mapping.glitch.me/). Included files:

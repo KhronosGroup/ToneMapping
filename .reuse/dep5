@@ -1,0 +1,12 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: Tone Mapping
+Upstream-Contact: The Khronos Group, Inc.
+Source: https://github.com/khronosgroup/ToneMapping
+
+Files: *.md
+Copyright: 2024 The Khronos Group, Inc.
+License: CC-BY-4.0
+
+Files: PBR_Neutral/config.ocio PBR_Neutral/lut-writer.mjs PBR_Neutral/pbrNeutral.cube PBR_Neutral/pbrNeutral.glsl
+Copyright: 2024 The Khronos Group, Inc.
+License: Apache-2.0
